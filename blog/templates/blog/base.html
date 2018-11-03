@@ -1,0 +1,78 @@
+{% load static %}
+<html>
+    <head>
+        <title>Sachin's Webapp</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <style>
+		h1 
+		{
+			/*color: #C6EBBA;*/
+		    font-size: 5em; /* 1em = 16px */
+		}
+		body
+		{
+		    background-color: #FFFF33;
+		}
+		div 
+		{
+		    padding: 20px;
+		    border: 1px solid #3A0302;
+		}
+		ul {
+		    list-style-type: none;
+		    margin: 0;
+		    padding: 0;
+		    overflow: hidden;
+		    background-color: #333;
+		}
+		li {
+		    float: left;
+		    border-right:1px solid #bbb;
+		}
+
+		li:last-child {
+		    border-right: none;
+		}
+
+		li a {
+		    display: block;
+		    color: white;
+		    text-align: center;
+		    padding: 14px 16px;
+		    text-decoration: none;
+		}
+
+		li a:hover:not(.active) {
+		    background-color: red;
+		    color: white;
+		}
+
+		.active {
+		    background-color: #4CAF50;
+		}
+		</style>
+    <body>
+        <div class="page-header">
+            <h1><a href="/">Sachin's Webapp</a></h1>
+        </div>
+        <ul>
+		  <li><a href="{% url 'post_list' %}">Home</a></li>
+		  {% for post in posts %}
+		  	<li><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></li>
+		  {% endfor %}
+		  <li style="float:right"><a href="/admin">Admin</a></li>
+		</ul>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
